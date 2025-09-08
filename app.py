@@ -1,8 +1,5 @@
 from flask import Flask, jsonify
 
-# Importing sqlite3 to work with databases and create a connection & database
-import sqlite3
-conn = sqlite3.connect("expenses.db")
 
 
 app = Flask(__name__)
