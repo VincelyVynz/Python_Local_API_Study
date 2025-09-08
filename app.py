@@ -13,7 +13,7 @@ def return_json():
 
 @app.route('/expenses')
 def return_expenses():
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM expenses")
     rows = cursor.fetchall()
@@ -27,19 +27,21 @@ def return_expenses():
     return jsonify(data)
 
 
-@app.route('/add_data', methods=['POST'])
+@app.route('/add_data')
 def add_data():
     try:
-        conn = sqlite3.connect('expenses.db')
+        conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         cursor.execute("""
-        INSERT INTO expenses (id, item, amount) VALUES (1, "electicity bill", 1080);
+            INSERT INTO expenses (item, amount)
+            VALUES ("electricity bill", 1080);
         """)
         conn.commit()
         print("working")
         return "Data added successfully!"
     except Exception as e:
         return str(e)
+
 
 
 if __name__ == '__main__':
