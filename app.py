@@ -31,3 +31,5 @@ def get_stock():
     conn.close()
     return jsonify(stock)
 
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
