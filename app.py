@@ -23,12 +23,11 @@ def get_products():
 def get_stock():
     conn = sqlite3.connect('store.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM products")
+    cursor.execute("SELECT * FROM products WHERE stock > 30")
     rows = cursor.fetchall()
     stock = []
     for row in rows:
-        if row[3] > 30:
-            stock.append({"id": row[0], "name": row[1], "price": row[2], "stock": row[3]})
+        stock.append({"id": row[0], "name": row[1], "price": row[2], "stock": row[3]})
     conn.close()
     return jsonify(stock)
 
